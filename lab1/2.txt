@@ -1,0 +1,43 @@
+input: '*111x11=*'
+blank: ' '
+start state: q0
+table:
+  q0:
+    '*': {R: q0}
+    1: {R: q0}
+    x: {R: q1}
+  q1:
+    1: {write: a, R: q2}
+  q2:
+    1: {L: q2}
+    a: {L: q2}
+    '=': {L: q2}
+    x: {L: q3}
+  q3:
+    1: {write: a, R: q4}
+    a: {L: q3}
+    '*': {R: q6}
+  q4:
+    x: {R: q4}
+    a: {R: q4}
+    '=': {R: q4}
+    1: {R: q4}
+    '*': {write: '1', R: q5}
+  q5:
+    ' ': {write: '*', L: q5}
+    '1': {L: q2}
+  q6:
+    a: {write: 1, R: q6}
+    'x': {R: q7}
+  q7:
+    a: {R: q7}
+    1: {write: a, R: q2}
+    '=': {L: q8}
+  q8:
+    a: {write: 1, L: q8}
+    x: {R: done}
+  done:
+    
+    
+    
+    

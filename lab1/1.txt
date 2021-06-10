@@ -1,0 +1,85 @@
+input: '1101λ01'
+blank: ' '
+start state: q0
+table:
+  q0:
+    [1,0,λ]: {R: q01}
+  q01:
+    [1,0,λ]: {R: q1}
+  q1:
+    1: {write: 0, R}
+    0: {write: 1, R}
+    λ : {write: 1, L: qz}
+  qz:
+
+
+
+
+
+input: '1001λ011λ0λ'
+blank: ' '
+start state: q0
+table:
+  q0:
+    [1,0,λ]: {R: q01}
+  q01:
+    [1,0,λ]: {R: q02}
+  q02:
+    [1,0,λ]: {R: q03}
+  q03:
+    [1,0,λ]: {R: q4}
+  q04:    
+    [1,0,λ]: {R: q1}
+  q1:
+    1: {write: λ, R}
+    0: {write: 1, R}
+    λ : {write: 1, R: q2}
+  q2:
+    1: {write: 1, R: q3}
+    0: {write: 0, R: q3}
+    λ : {write: λ, R: q3}
+  q3:
+    1: {write: λ, R: q4}
+    0: {write: 1, R: q4}
+    λ : {write: λ, R: q4}
+  q4:
+    1: {write: λ, L: q4}
+    0: {write: 1, L: q1}
+    λ : {write: λ, R: q2}
+
+
+
+input: 'cabdabda'
+blank: ' '
+start state: q0
+table:
+  q0:
+    [a,b,c,d]: {L: q0}
+    ' ': {R: q1}
+    '#': {L: q2}
+  q1:
+    '#': {R: q1}
+    a: {write: '#', R: qa}
+    b: {write: '#', R: qb}
+    c: {write: '#', R: qc}
+    d: {write: '#', R: qd}
+  q2: 
+    ' ': {R: q1} 
+    '#': {write: ' ', R: q3}
+  q3: 
+    [a,b,c,d]: {R: q3}
+    '#': {write: ' ', R: q3}
+    ' ': {L: done}
+  qa:
+    [a,b,c,d]: {R: qa}
+    ' ': {write: a, L: q0}
+  qb:
+    [a,b,c,d]: {R: qb}
+    ' ': {write: b, L: q0}
+  qc:
+    [a,b,c,d]: {R: qc}
+    ' ': {write: c, L: q0}
+  qd:
+    [a,b,c,d]: {R: qd}
+    ' ': {write: d, L: q0}
+  done:
